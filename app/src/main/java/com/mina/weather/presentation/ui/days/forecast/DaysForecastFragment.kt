@@ -45,7 +45,9 @@ class DaysForecastFragment : Fragment(R.layout.fragment_days_forecast) {
 
         currentLocation = getCurrentLocationFromArgs()
 
-        initViewModel()
+        if(!::viewModel.isInitialized){
+            initViewModel()
+        }
 
         initViews(view)
 
