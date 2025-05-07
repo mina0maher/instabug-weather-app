@@ -18,6 +18,6 @@ class GetIncomingDaysForecastUseCase(
                     lowTemp = dayForecast.lowTemp.toCelsius(),
                     highTemp = dayForecast.highTemp.toCelsius()
                 )
-            }.take(5)
+            }.slice(1..5)
     }
 }
