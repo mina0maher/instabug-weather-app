@@ -15,8 +15,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.mina.weather.R
-import com.mina.weather.data.repository.FakeRepository
 import com.mina.weather.data.repository.LocationRepositoryImpl
+import com.mina.weather.data.repository.WeatherRepositoryImpl
 import com.mina.weather.domain.models.HourlyForecast
 import com.mina.weather.domain.models.LatLng
 import com.mina.weather.domain.models.TodayForecast
@@ -78,7 +78,7 @@ class TodayFragment : Fragment(R.layout.fragment_today) {
     }
 
     private fun initViewModel(){
-        val getTodayForecastUseCase = GetTodayForecastUseCase(FakeRepository())
+        val getTodayForecastUseCase = GetTodayForecastUseCase(WeatherRepositoryImpl())
         val getCurrentLocationUseCase = GetCurrentLocationUseCase(LocationRepositoryImpl(requireContext()))
         val factory = ViewModelFactory {
             TodayForecastViewModel(getTodayForecastUseCase, getCurrentLocationUseCase)

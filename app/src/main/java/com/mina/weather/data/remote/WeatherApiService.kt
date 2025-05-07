@@ -4,7 +4,6 @@ import com.mina.weather.data.utils.ApiConstants
 import java.net.HttpURLConnection
 import java.net.URL
 
-class WeatherApiService {
 
     fun fetchWeatherData(lat: Double, lng: Double): String {
         val urlString = "${ApiConstants.BASE_URL}$lat,$lng?unitGroup=${ApiConstants.UNIT_GROUP}&key=${ApiConstants.API_KEY}&contentType=${ApiConstants.CONTENT_TYPE}"
@@ -31,4 +30,4 @@ class WeatherApiService {
             connection.disconnect()
         }
     }
-}
+

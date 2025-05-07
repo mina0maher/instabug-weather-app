@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.mina.weather.R
-import com.mina.weather.data.repository.FakeRepository
+import com.mina.weather.data.repository.WeatherRepositoryImpl
 import com.mina.weather.presentation.ui.utils.adapters.MainAdapter
 import com.mina.weather.domain.models.DayForecast
 import com.mina.weather.domain.models.LatLng
@@ -62,7 +62,7 @@ class DaysForecastFragment : Fragment(R.layout.fragment_days_forecast) {
 
     private fun initViewModel(){
         val factory = ViewModelFactory {
-            DaysForecastViewModel(GetIncomingDaysForecastUseCase(FakeRepository()))
+            DaysForecastViewModel(GetIncomingDaysForecastUseCase(WeatherRepositoryImpl()))
         }
         viewModel = ViewModelProvider(this, factory)[DaysForecastViewModel::class.java]
     }
