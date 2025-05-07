@@ -12,23 +12,16 @@ import com.mina.weather.domain.utils.states.Result
 
 
 class WeatherRepositoryImpl : WeatherRepository {
-    override fun getTodayForecast(latLng: LatLng): Result<TodayForecast> {
-        return try {
-            val json = fetchWeatherData(latLng.latitude, latLng.longitude)
-            val apiResponse = parseApiResponse(json)
-            Result.Success(apiResponse.toTodayForecast())
-        } catch (e: Exception) {
-            Result.Error(e.message.toString())
-        }
+    override fun getTodayForecast(latLng: LatLng): TodayForecast {
+        val json = fetchWeatherData(latLng.latitude, latLng.longitude)
+        val apiResponse = parseApiResponse(json)
+        return apiResponse.toTodayForecast()
     }
 
-    override fun getIncomingDaysForecast(latLng: LatLng): Result<List<DayForecast>> {
-        return try {
-            val json = fetchWeatherData(latLng.latitude, latLng.longitude)
-            val apiResponse = parseApiResponse(json)
-            Result.Success(apiResponse.days.map { it.toDayForecast() })
-        } catch (e: Exception) {
-            Result.Error(e.message.toString())
-        }
+    override fun getIncomingDaysForecast(latLng: LatLng): List<DayForecast> {
+        val json = fetchWeatherData(latLng.latitude, latLng.longitude)
+        val apiResponse = parseApiResponse(json)
+        return apiResponse.days.map { it.toDayForecast() }
     }
 }
+
