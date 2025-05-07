@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.mina.weather.domain.models.DayForecast
 import com.mina.weather.domain.models.LatLng
 import com.mina.weather.domain.usecase.GetIncomingDaysForecastUseCase
-import com.mina.weather.domain.utils.Result
+import com.mina.weather.domain.utils.states.Result
 import com.mina.weather.presentation.ui.utils.states.DaysUIState
 
 class DaysForecastViewModel(

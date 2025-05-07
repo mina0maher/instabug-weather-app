@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel
 import com.mina.weather.domain.models.TodayForecast
 import com.mina.weather.domain.usecase.GetCurrentLocationUseCase
 import com.mina.weather.domain.usecase.GetTodayForecastUseCase
-import com.mina.weather.domain.utils.LocationResult
-import com.mina.weather.domain.utils.Result
+import com.mina.weather.domain.utils.states.LocationResult
+import com.mina.weather.domain.utils.states.Result
 import com.mina.weather.presentation.ui.utils.states.TodayUIState
 
 class TodayForecastViewModel(

@@ -4,12 +4,11 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.LocationServices
 import com.mina.weather.domain.models.LatLng
 import com.mina.weather.domain.repository.LocationRepository
-import com.mina.weather.domain.utils.LocationResult
+import com.mina.weather.domain.utils.states.LocationResult
 
 class LocationRepositoryImpl(private val context: Context) : LocationRepository {
 

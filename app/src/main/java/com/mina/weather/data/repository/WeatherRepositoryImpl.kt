@@ -8,7 +8,7 @@ import com.mina.weather.domain.models.DayForecast
 import com.mina.weather.domain.models.LatLng
 import com.mina.weather.domain.models.TodayForecast
 import com.mina.weather.domain.repository.WeatherRepository
-import com.mina.weather.domain.utils.Result
+import com.mina.weather.domain.utils.states.Result
 
 
 class WeatherRepositoryImpl : WeatherRepository {

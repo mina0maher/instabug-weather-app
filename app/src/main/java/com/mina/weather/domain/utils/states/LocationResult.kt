@@ -1,4 +1,4 @@
-package com.mina.weather.domain.utils
+package com.mina.weather.domain.utils.states
 
 import com.mina.weather.domain.models.LatLng
 
