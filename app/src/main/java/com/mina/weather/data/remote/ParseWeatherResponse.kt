@@ -1,4 +1,4 @@
-package com.mina.weather.data.parser
+package com.mina.weather.data.remote
 
 import com.mina.weather.data.models.CurrentConditionsDto
 import com.mina.weather.data.models.DayDto
