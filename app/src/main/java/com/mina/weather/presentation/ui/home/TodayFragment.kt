@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -58,6 +59,7 @@ class TodayFragment : Fragment(R.layout.fragment_today) {
     private lateinit var nextDaysText: TextView
     private lateinit var hourlyForecastRecycler: RecyclerView
     private lateinit var viewModel: TodayForecastViewModel
+    private lateinit var todayObserver: Observer<TodayUIState<TodayForecast>>
     private var currentLocation:LatLng = LatLng(0.0,0.0) //default values
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -121,7 +123,7 @@ class TodayFragment : Fragment(R.layout.fragment_today) {
     }
 
     private fun observeState() {
-        viewModel.todayForecastState.observe(viewLifecycleOwner) { result ->
+        todayObserver = Observer{ result ->
             when (result) {
                 is TodayUIState.Loading -> isLoading(isLoading = true,isRefreshing = true)
                 is TodayUIState.Success -> {
@@ -153,6 +155,8 @@ class TodayFragment : Fragment(R.layout.fragment_today) {
                 }
             }
         }
+        viewModel.todayForecastState.observe(viewLifecycleOwner, todayObserver)
+
     }
 
     private fun bindTodayData(today: TodayForecast) {
@@ -222,5 +226,10 @@ class TodayFragment : Fragment(R.layout.fragment_today) {
         errorText.visibility = VISIBLE
     }
 
-
+    override fun onDestroyView() {
+        todayObserver.let {
+            viewModel.todayForecastState.removeObserver(it)
+        }
+        super.onDestroyView()
+    }
 }

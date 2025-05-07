@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +37,7 @@ class DaysForecastFragment : Fragment(R.layout.fragment_days_forecast) {
     private lateinit var backImage:ImageView
     private lateinit var daysForecastRecyclerView: RecyclerView
     private lateinit var currentLocation:LatLng
+    private lateinit var daysObserver: Observer<DaysUIState<List<DayForecast>>>
     private lateinit var viewModel: DaysForecastViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,7 +95,7 @@ class DaysForecastFragment : Fragment(R.layout.fragment_days_forecast) {
     }
 
     private fun observeState() {
-        viewModel.daysForecastState.observe(viewLifecycleOwner) { result ->
+        daysObserver = Observer { result ->
             when (result) {
                 is DaysUIState.Loading -> isLoading(true)
                 is DaysUIState.Success -> {
@@ -108,6 +110,7 @@ class DaysForecastFragment : Fragment(R.layout.fragment_days_forecast) {
 
             }
         }
+        viewModel.daysForecastState.observe(viewLifecycleOwner,daysObserver)
     }
 
     private fun isLoading(isLoading: Boolean) {
@@ -153,5 +156,11 @@ class DaysForecastFragment : Fragment(R.layout.fragment_days_forecast) {
 
     }
 
+    override fun onDestroyView() {
+        daysObserver.let {
+            viewModel.daysForecastState.removeObserver(it)
+        }
+        super.onDestroyView()
+    }
 
 }
