@@ -191,7 +191,7 @@ class TodayFragment : Fragment(R.layout.fragment_today) {
 
     private fun setListeners() {
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.loadTodayForecast()
+            viewModel.loadTodayForecast(forceRefresh = true)
         }
 
         nextDaysText.setOnClickListener {

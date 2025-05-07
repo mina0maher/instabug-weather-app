@@ -149,7 +149,7 @@ class DaysForecastFragment : Fragment(R.layout.fragment_days_forecast) {
     private fun setListeners(){
 
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.loadDaysForecast(currentLocation)
+            viewModel.loadDaysForecast(currentLocation, forceRefresh = true)
         }
 
         backImage.setOnClickListener {

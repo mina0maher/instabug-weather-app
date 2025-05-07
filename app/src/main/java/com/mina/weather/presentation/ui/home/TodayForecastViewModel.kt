@@ -20,7 +20,11 @@ class TodayForecastViewModel(
     private val _todayForecastState = MutableLiveData<TodayUIState<TodayForecast>>()
     val todayForecastState: LiveData<TodayUIState<TodayForecast>> = _todayForecastState
 
-    fun loadTodayForecast() {
+    fun loadTodayForecast(forceRefresh: Boolean = false) {
+        val currentState = _todayForecastState.value
+        if (!forceRefresh && currentState is TodayUIState.Success) {
+            return
+        }
         _todayForecastState.value = TodayUIState.Loading
 
         getCurrentLocationUseCase.execute { locationResult ->

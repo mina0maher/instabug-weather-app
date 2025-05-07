@@ -18,7 +18,11 @@ class DaysForecastViewModel(
     private val _daysForecastState = MutableLiveData<DaysUIState<List<DayForecast>>>()
     val daysForecastState :LiveData<DaysUIState<List<DayForecast>>> = _daysForecastState
 
-    fun loadDaysForecast(currentLocation:LatLng){
+    fun loadDaysForecast(currentLocation:LatLng,forceRefresh: Boolean = false){
+        val currentState = _daysForecastState.value
+        if (!forceRefresh && currentState is DaysUIState.Success) {
+            return
+        }
         _daysForecastState.value = DaysUIState.Loading
         Thread{
             val result = getIncomingDaysForecastUseCase.execute(currentLocation)
