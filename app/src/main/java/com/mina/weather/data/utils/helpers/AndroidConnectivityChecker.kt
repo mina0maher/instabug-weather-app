@@ -1,4 +1,4 @@
-package com.mina.weather.data.utils
+package com.mina.weather.data.utils.helpers
 
 import android.content.Context
 import android.net.ConnectivityManager

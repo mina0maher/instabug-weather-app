@@ -20,7 +20,7 @@ import com.mina.weather.data.local.WeatherLocalDataSourceImpl
 import com.mina.weather.data.remote.WeatherRemoteDataSourceImpl
 import com.mina.weather.data.repository.LocationRepositoryImpl
 import com.mina.weather.data.repository.WeatherRepositoryImpl
-import com.mina.weather.data.utils.AndroidConnectivityChecker
+import com.mina.weather.data.utils.helpers.AndroidConnectivityChecker
 import com.mina.weather.domain.models.HourlyForecast
 import com.mina.weather.domain.models.LatLng
 import com.mina.weather.domain.models.TodayForecast

@@ -2,7 +2,7 @@ package com.mina.weather.data.repository
 
 import com.mina.weather.data.local.WeatherLocalDataSource
 import com.mina.weather.data.remote.WeatherRemoteDataSource
-import com.mina.weather.data.utils.ConnectivityChecker
+import com.mina.weather.data.utils.helpers.ConnectivityChecker
 import com.mina.weather.data.utils.NoCachedDataException
 import com.mina.weather.data.utils.NoDataAvailableException
 import com.mina.weather.domain.models.DayForecast
