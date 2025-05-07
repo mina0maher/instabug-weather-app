@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/error_message"
+        android:visibility="gone"
         android:textAlignment="center"
         android:textColor="?attr/colorOnSurface"
         android:layout_margin="10dp"
@@ -42,7 +43,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no">
 
             <LinearLayout
                 android:id="@+id/layout_today"
