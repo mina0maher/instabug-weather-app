@@ -9,7 +9,7 @@ fun WeatherResponse.toTodayForecast(): TodayForecast {
     return TodayForecast(
         latLng = LatLng(this.latitude, this.longitude),
         today = this.days.firstOrNull()?.datetime ?: "",
-        date = this.currentConditions.datetime,
+        date = this.days.firstOrNull()?.datetime ?: "",
         icon = this.currentConditions.icon,
         status = this.currentConditions.conditions,
         temperature = this.currentConditions.temp.toInt(),
