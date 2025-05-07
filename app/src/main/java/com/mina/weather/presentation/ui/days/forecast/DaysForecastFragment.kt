@@ -13,7 +13,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.mina.weather.R
+import com.mina.weather.data.local.WeatherDatabaseHelper
+import com.mina.weather.data.local.WeatherLocalDataSourceImpl
+import com.mina.weather.data.remote.WeatherRemoteDataSourceImpl
 import com.mina.weather.data.repository.WeatherRepositoryImpl
+import com.mina.weather.data.utils.AndroidConnectivityChecker
 import com.mina.weather.presentation.ui.utils.adapters.MainAdapter
 import com.mina.weather.domain.models.DayForecast
 import com.mina.weather.domain.models.LatLng
@@ -60,10 +64,24 @@ class DaysForecastFragment : Fragment(R.layout.fragment_days_forecast) {
         )
     }
 
-    private fun initViewModel(){
+    private fun initViewModel() {
+        val weatherDatabaseHelper = WeatherDatabaseHelper(requireContext())
+        val remoteDataSource = WeatherRemoteDataSourceImpl()
+        val localDataSource = WeatherLocalDataSourceImpl(weatherDatabaseHelper)
+        val connectivityChecker = AndroidConnectivityChecker(requireContext())
+
+        val weatherRepository = WeatherRepositoryImpl(
+            remoteDataSource = remoteDataSource,
+            localDataSource = localDataSource,
+            connectivityChecker = connectivityChecker
+        )
+
+        val getIncomingDaysForecastUseCase = GetIncomingDaysForecastUseCase(weatherRepository)
+
         val factory = ViewModelFactory {
-            DaysForecastViewModel(GetIncomingDaysForecastUseCase(WeatherRepositoryImpl()))
+            DaysForecastViewModel(getIncomingDaysForecastUseCase)
         }
+
         viewModel = ViewModelProvider(this, factory)[DaysForecastViewModel::class.java]
     }
 

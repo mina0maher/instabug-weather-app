@@ -15,8 +15,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.mina.weather.R
+import com.mina.weather.data.local.WeatherDatabaseHelper
+import com.mina.weather.data.local.WeatherLocalDataSourceImpl
+import com.mina.weather.data.remote.WeatherRemoteDataSourceImpl
 import com.mina.weather.data.repository.LocationRepositoryImpl
 import com.mina.weather.data.repository.WeatherRepositoryImpl
+import com.mina.weather.data.utils.AndroidConnectivityChecker
 import com.mina.weather.domain.models.HourlyForecast
 import com.mina.weather.domain.models.LatLng
 import com.mina.weather.domain.models.TodayForecast
@@ -77,12 +81,25 @@ class TodayFragment : Fragment(R.layout.fragment_today) {
         }
     }
 
-    private fun initViewModel(){
-        val getTodayForecastUseCase = GetTodayForecastUseCase(WeatherRepositoryImpl())
-        val getCurrentLocationUseCase = GetCurrentLocationUseCase(LocationRepositoryImpl(requireContext()))
+    private fun initViewModel() {
+        val weatherRepository = WeatherRepositoryImpl(
+            remoteDataSource = WeatherRemoteDataSourceImpl(),
+            localDataSource = WeatherLocalDataSourceImpl(WeatherDatabaseHelper(requireContext())),
+            connectivityChecker = AndroidConnectivityChecker(requireContext())
+        )
+
+        val locationRepository = LocationRepositoryImpl(requireContext())
+
+        val getTodayForecastUseCase = GetTodayForecastUseCase(weatherRepository)
+        val getCurrentLocationUseCase = GetCurrentLocationUseCase(locationRepository)
+
         val factory = ViewModelFactory {
-            TodayForecastViewModel(getTodayForecastUseCase, getCurrentLocationUseCase)
+            TodayForecastViewModel(
+                getTodayForecastUseCase = getTodayForecastUseCase,
+                getCurrentLocationUseCase = getCurrentLocationUseCase
+            )
         }
+
         viewModel = ViewModelProvider(this, factory)[TodayForecastViewModel::class.java]
     }
 
