@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/todayFragment">
+
+    <fragment
+        android:id="@+id/todayFragment"
+        android:name="com.mina.weather.presentation.ui.home.TodayFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_today" >
+        <action
+            android:id="@+id/action_todayFragment_to_daysForecastFragment"
+            app:destination="@id/daysForecastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/daysForecastFragment"
+        android:name="com.mina.weather.presentation.ui.days.forecast.DaysForecastFragment"
+        android:label="fragment_tomorrow"
+        tools:layout="@layout/fragment_days_forecast" >
+    </fragment>
+</navigation>

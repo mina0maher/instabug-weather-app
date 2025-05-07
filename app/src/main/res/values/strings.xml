@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="weather_condition_image">Weather Condition Image</string>
+    <string name="wind_icon">Wind Icon</string>
+    <string name="rain_icon">Rain Icon</string>
+    <string name="humidity_icon">Humidity Icon</string>
+    <string name="today">Today</string>
+    <string name="next_7_days"><![CDATA[Next 7 Days >]]></string>
+    <string name="_12_km_h">12 km/h</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="rain">Rain</string>
+    <string name="_18">18%</string>
+    <string name="_25_c">25°C</string>
+    <string name="mostly_cloudy">Mostly Cloudy</string>
+    <string name="mon_june_17">Mon June 17</string>
+    <string name="humidity">Humidity</string>
+    <string name="_1_am">1 AM</string>
+    <string name="weather_condition_icon">Weather Condition Icon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back_icon">Back Icon</string>
+    <string name="the_coming_5_days_weather_forecasting">The Coming 5 Days Weather Forecasting</string>
+    <string name="error_message">Error message</string>
+</resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="?attr/colorSurface">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <TextView
+            android:id="@+id/text_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/today"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_condition"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/weather_condition_image"
+            app:srcCompat="@drawable/cloudy"
+            app:layout_constraintStart_toEndOf="@id/text_day"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/text_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:text="@string/rain"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="14sp"
+            android:gravity="start"
+            app:layout_constraintBottom_toBottomOf="@id/image_condition"
+            app:layout_constraintEnd_toStartOf="@+id/text_high_degree"
+            app:layout_constraintStart_toEndOf="@id/image_condition"
+            app:layout_constraintTop_toTopOf="@id/image_condition" />
+
+        <TextView
+            android:id="@+id/text_high_degree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_18"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/text_low_degree"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="12dp" />
+
+        <TextView
+            android:id="@+id/text_low_degree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_18"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
