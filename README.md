@@ -2,9 +2,10 @@
 
 ## Summary
 
-This project is a **Weather Tracking App** built for the Android Internship Task 2025.  
+This project is a **Weather Tracking App** built for the Instabug Android Internship Task 2025.  
 It meets the following requirements:
 
+✅ Check if the user has granted permissions and if GPS is enabled
 ✅ Get the user's location using device GPS (latitude, longitude)  
 ✅ Get current weather and 5-day forecast using a weather API  
 ✅ Two screens:  
@@ -17,27 +18,35 @@ It meets the following requirements:
 
 ---
 
-## Architecture & Design
+## 📐 Architecture Overview
 
-The project follows **Clean Architecture** with three clear layers:
+The app follows **Clean Architecture** with three main layers:
 
-- **Data Layer**
-  - Remote data source using `HttpURLConnection`
-  - Local data source using `SQLite`
-  - Location service implementation
-  - Repository: decides whether to serve data from remote or local source based on network state
+---
 
-- **Domain Layer**
-  - Contains use cases
-  - Prepares logic and data for presentation
+### 🏗 Data Layer
+- Remote (API) → `HttpURLConnection`
+- Local (Cache) → `SQLite`
+- Location → checks permissions + GPS status
+- Repository → picks between remote/local based on network
 
-- **Presentation Layer**
-  - Contains:
-    - Two `ViewModel`s
-    - Two `Fragment`s  
-  - Uses:
-    - `LiveData` for data observation
-    - `SwipeRefreshLayout` for refreshing weather data
+---
+
+### ⚙ Domain Layer
+- Models → clean entities (`TodayForecast`, `DayForecast`, etc.)
+- Repositories → abstract interfaces
+- Use Cases → app logic (`GetTodayForecastUseCase`, etc.)
+- Helpers → unified `Result`, `LocationResult`
+
+---
+
+### 🎨 Presentation Layer
+- ViewModels → 2 (`TodayForecastViewModel`, `IncomingDaysForecastViewModel`)
+- Fragments → Today + 5-day screens
+- LiveData → reactive UI updates
+- Swipe-to-Refresh → manual refresh
+- Offline support → cached data + error messages
+- Handles config changes (e.g., rotation)
 
 ---
 
