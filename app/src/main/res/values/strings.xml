@@ -5,7 +5,7 @@
     <string name="rain_icon">Rain Icon</string>
     <string name="humidity_icon">Humidity Icon</string>
     <string name="today">Today</string>
-    <string name="next_7_days"><![CDATA[Next 7 Days >]]></string>
+    <string name="next_5_days"><![CDATA[Next 5 Days >]]></string>
     <string name="_12_km_h">12 km/h</string>
     <string name="wind_speed">Wind Speed</string>
     <string name="rain">Rain</string>

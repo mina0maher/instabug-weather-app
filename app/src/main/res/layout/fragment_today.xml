@@ -87,6 +87,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
                         android:contentDescription="@string/weather_condition_image"
+                        android:maxHeight="120dp"
+                        android:maxWidth="120dp"
+                        android:adjustViewBounds="true"
                         app:srcCompat="@drawable/cloudy_sunny" />
 
                     <TextView
@@ -235,7 +238,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_rounded_rectangle"
-                        android:text="@string/next_7_days"
+                        android:text="@string/next_5_days"
                         android:textAlignment="center"
                         android:textColor="?attr/colorOnSurface"
                         android:textSize="20sp"
