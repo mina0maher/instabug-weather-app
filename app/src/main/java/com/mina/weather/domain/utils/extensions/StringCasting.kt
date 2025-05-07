@@ -26,7 +26,7 @@ fun String.getDayName(): String {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = inputFormat.parse(this)
         val dayFormat = SimpleDateFormat("EEEE", Locale.getDefault())
-        dayFormat.format(date)
+        dayFormat.format(date!!)
     } catch (e: Exception) {
         e.printStackTrace()
         ""
