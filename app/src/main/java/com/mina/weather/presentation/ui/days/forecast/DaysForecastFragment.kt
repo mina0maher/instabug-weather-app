@@ -103,7 +103,7 @@ class DaysForecastFragment : Fragment(R.layout.fragment_days_forecast) {
                 is DaysUIState.Error -> {
                     isLoading(false)
                     swipeRefreshLayout.isRefreshing = false
-                    showToast(requireContext(),"Error: ${result.message}")
+                    showToast(requireContext(),result.message)
                 }
 
             }
