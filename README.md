@@ -5,7 +5,7 @@
 This project is a **Weather Tracking App** built for the Instabug Android Internship Task 2025.  
 It meets the following requirements:
 
-✅ Check if the user has granted permissions and if GPS is enabled
+✅ Check if the user has granted permissions and if GPS is enabled  
 ✅ Get the user's location using device GPS (latitude, longitude)  
 ✅ Get current weather and 5-day forecast using a weather API  
 ✅ Two screens:  
