@@ -4,7 +4,7 @@
 
 You can download the debug APK here:
 
-[Click here to download the debug APK](instabug-weather-app/apk/app-debug.apk)
+[Click here to download the debug APK](apk/app-debug.apk)
 
 ---
 
