@@ -1,7 +1,5 @@
 package com.mina.weather.presentation.ui.home
 
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +8,7 @@ import com.mina.weather.domain.usecase.GetCurrentLocationUseCase
 import com.mina.weather.domain.usecase.GetTodayForecastUseCase
 import com.mina.weather.domain.utils.states.LocationResult
 import com.mina.weather.domain.utils.states.Result
+import com.mina.weather.presentation.ui.utils.executer.AppExecutors
 import com.mina.weather.presentation.ui.utils.states.TodayUIState
 
 class TodayForecastViewModel(
@@ -30,15 +29,15 @@ class TodayForecastViewModel(
         getCurrentLocationUseCase.execute { locationResult ->
             when (locationResult) {
                 is LocationResult.Success -> {
-                    Thread {
+                    AppExecutors.executeOnDiskIO {
                         val result = getTodayForecastUseCase.execute(locationResult.latLng)
-                        Handler(Looper.getMainLooper()).post {
+                        AppExecutors.postToMainThread {
                             when (result) {
                                 is Result.Error -> _todayForecastState.value = TodayUIState.Error(result.message)
                                 is Result.Success -> _todayForecastState.value = TodayUIState.Success(result.data)
                             }
                         }
-                    }.start()
+                    }
                 }
                 is LocationResult.PermissionDenied -> {
                     _todayForecastState.postValue(TodayUIState.PermissionDenied)
