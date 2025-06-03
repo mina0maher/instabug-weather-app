@@ -56,19 +56,21 @@ The app follows **Clean Architecture** with separation of concerns between:
 
 ---
 
+
 ## 🛠 Technical Details
 
 | Feature                  | Implementation                                  |
 |--------------------------|--------------------------------------------------|
-| Language                 | Kotlin                                           |
-| UI Layout                | XML                                              |
-| Networking               | `HttpURLConnection`                             |
-| Caching                  | Manual `SQLiteOpenHelper`                       |
-| Location Access          | `LocationManager` + permission checks manually  |
-| Offline Mode             | Handled via local cache                         |
-| Configuration Changes    | ViewModels retain state                         |
-| Themes                   | Supports light/dark modes                       |
-| Screen Sizes             | Optimized for different resolutions/orientations|
+| Language                 | Kotlin + XML                                     |
+| Network                  | `HttpURLConnection` (no third-party libraries)   |
+| Local Storage            | `SQLite` (no Room)                               |
+| Architecture             | Clean Architecture                               |
+| UI Framework             | Fragments + ViewModel + LiveData                 |
+| Multithreading           | Custom **Thread Pool** (`Executors`)            |
+| Main Thread Safety       | No blocking on UI thread                         |
+| Offline Support          | Cached latest forecast in SQLite                 |
+| Configuration Changes    | Fully supported (rotation, theme, etc.)          |
+| Swipe-to-Refresh         | Manual refresh for current weather               |
 
 ---
 
@@ -101,3 +103,12 @@ The app follows **Clean Architecture** with separation of concerns between:
   - Location updates  
   - Network requests  
   - Local data storage  
+
+---
+
+## 👨‍💻 Developed by
+
+**Mina Maher**  
+[GitHub Profile](https://github.com/mina0maher)
+
+---
