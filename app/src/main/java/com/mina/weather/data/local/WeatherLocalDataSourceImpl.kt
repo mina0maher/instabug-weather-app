@@ -13,6 +13,7 @@ class WeatherLocalDataSourceImpl(
 
     override fun saveTodayForecast(todayForecast: TodayForecast) {
         val db = dbHelper.writableDatabase
+        db.delete("today_forecast", null, null)
         val values = ContentValues().apply {
             put("date", todayForecast.date)
             put("today", todayForecast.today)
