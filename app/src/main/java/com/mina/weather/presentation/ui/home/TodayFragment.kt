@@ -145,7 +145,7 @@ class TodayFragment : Fragment(R.layout.fragment_today) {
                             viewModel.loadTodayForecast()
                         },
                         onGpsRejected = {
-                            showErrorMessage("GPS still disabled")
+                            showErrorMessage("GPS disabled, please enable it and try again")
                         }
                     )
                 }

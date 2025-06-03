@@ -1,43 +1,47 @@
 package com.mina.weather.presentation.ui.utils.location
 
-import android.content.IntentSender
+import android.content.Intent
+import android.location.LocationManager
+import android.os.Build
+import android.provider.Settings
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.gms.location.Priority
-import com.mina.weather.presentation.ui.utils.helpers.Key.LOCATION_SETTINGS_INTERVAL_MILLIS
-import com.mina.weather.presentation.ui.utils.helpers.Key.LOCATION_SETTINGS_REQUEST_CODE
 
 fun Fragment.checkLocationSettings(
     onGpsEnabled: () -> Unit,
     onGpsRejected: () -> Unit
 ) {
-    val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, LOCATION_SETTINGS_INTERVAL_MILLIS).build()
+    val locationManager = requireContext().getSystemService(LocationManager::class.java)
 
-    val builder = LocationSettingsRequest.Builder()
-        .addLocationRequest(locationRequest)
-        .setAlwaysShow(true)
-
-    val settingsClient = LocationServices.getSettingsClient(requireContext())
-    val task = settingsClient.checkLocationSettings(builder.build())
-
-    task.addOnSuccessListener {
-        onGpsEnabled()
+    fun isLocationEnabled(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            locationManager.isLocationEnabled
+        } else {
+            locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                    locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        }
     }
 
-    task.addOnFailureListener { exception ->
-        if (exception is ResolvableApiException) {
-            try {
-                exception.startResolutionForResult(requireActivity(), LOCATION_SETTINGS_REQUEST_CODE)
-            } catch (sendEx: IntentSender.SendIntentException) {
-                sendEx.printStackTrace()
-                onGpsRejected()
+    if (isLocationEnabled()) {
+        onGpsEnabled()
+    } else {
+        try {
+            val locationSettingsRequest = registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult()
+            ) {
+                if (isLocationEnabled()) {
+                    onGpsEnabled()
+                } else {
+                    onGpsRejected()
+                }
             }
-        } else {
+
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            locationSettingsRequest.launch(intent)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
             onGpsRejected()
         }
     }
 }
-
