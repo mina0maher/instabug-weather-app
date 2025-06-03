@@ -11,7 +11,8 @@ import com.mina.weather.presentation.ui.utils.executer.AppExecutors
 import com.mina.weather.presentation.ui.utils.states.DaysUIState
 
 class DaysForecastViewModel(
-    private val getIncomingDaysForecastUseCase: GetIncomingDaysForecastUseCase
+    private val getIncomingDaysForecastUseCase: GetIncomingDaysForecastUseCase,
+    private val appExecutors: AppExecutors = AppExecutors
 ) : ViewModel() {
 
     private val _daysForecastState = MutableLiveData<DaysUIState<List<DayForecast>>>()
@@ -24,9 +25,9 @@ class DaysForecastViewModel(
         }
         _daysForecastState.value = DaysUIState.Loading
 
-        AppExecutors.executeOnDiskIO {
+        appExecutors.executeOnDiskIO {
             val result = getIncomingDaysForecastUseCase.execute(currentLocation)
-            AppExecutors.postToMainThread {
+            appExecutors.postToMainThread {
                 when (result) {
                     is Result.Error -> _daysForecastState.value = DaysUIState.Error(result.message)
                     is Result.Success -> _daysForecastState.value = DaysUIState.Success(result.data)

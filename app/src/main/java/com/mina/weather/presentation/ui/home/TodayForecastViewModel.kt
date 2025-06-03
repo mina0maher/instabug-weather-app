@@ -13,7 +13,8 @@ import com.mina.weather.presentation.ui.utils.states.TodayUIState
 
 class TodayForecastViewModel(
     private val getTodayForecastUseCase: GetTodayForecastUseCase,
-    private val getCurrentLocationUseCase: GetCurrentLocationUseCase
+    private val getCurrentLocationUseCase: GetCurrentLocationUseCase,
+    private val appExecutors: AppExecutors = AppExecutors
 ) : ViewModel() {
 
     private val _todayForecastState = MutableLiveData<TodayUIState<TodayForecast>>()
@@ -29,9 +30,9 @@ class TodayForecastViewModel(
         getCurrentLocationUseCase.execute { locationResult ->
             when (locationResult) {
                 is LocationResult.Success -> {
-                    AppExecutors.executeOnDiskIO {
+                    appExecutors.executeOnDiskIO {
                         val result = getTodayForecastUseCase.execute(locationResult.latLng)
-                        AppExecutors.postToMainThread {
+                        appExecutors.postToMainThread {
                             when (result) {
                                 is Result.Error -> _todayForecastState.value = TodayUIState.Error(result.message)
                                 is Result.Success -> _todayForecastState.value = TodayUIState.Success(result.data)
